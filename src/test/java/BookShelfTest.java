@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("the bookshelf")
@@ -21,5 +23,15 @@ class BookShelfTest {
         BookShelf shelf = new BookShelf();
         List<String> books = shelf.books();
         assertTrue(books.isEmpty(), () -> "BookShelf should be empty.");
+    }
+
+    @Test
+    @DisplayName("should have two books when two books added to it")
+    void bookshelfContainsTwoBooksWhenTwoBooksAdded() {
+        BookShelf shelf = new BookShelf();
+        shelf.add("Effective Java");
+        shelf.add("Code Complete");
+        List<String> books = shelf.books();
+        assertEquals(2, books.size(), () -> "BookShelf should have two books.");
     }
 }
