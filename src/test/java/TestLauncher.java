@@ -4,9 +4,11 @@ import org.junit.platform.launcher.LauncherDiscoveryRequest;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
-
 import java.io.PrintWriter;
 
+// TODO Update deprecated Gradle features
+
+@Deprecated
 public class TestLauncher {
 
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class TestLauncher {
         LauncherDiscoveryRequest discoveryRequest =
                 LauncherDiscoveryRequestBuilder
                 .request()
-                .selectors(DiscoverySelectors.selectPackage("bookstore"))
+                .selectors(DiscoverySelectors.selectPackage("junit5-gradle"))
                 .build();
 
         launcher.execute(discoveryRequest);
