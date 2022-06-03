@@ -21,7 +21,7 @@ class BookShelfTest {
     void shelfEmptyWhenNoBookAdded(TestInfo testInfo) {
         System.out.println("Working on test case " + testInfo.getDisplayName());
         BookShelf shelf = new BookShelf();
-        List<String> books = shelf.books();
+        List<String> books = shelf.getBooks();
         assertTrue(books.isEmpty(), () -> "BookShelf should be empty.");
     }
 
@@ -31,7 +31,7 @@ class BookShelfTest {
         BookShelf shelf = new BookShelf();
         shelf.add("Effective Java");
         shelf.add("Code Complete");
-        List<String> books = shelf.books();
+        List<String> books = shelf.getBooks();
         assertEquals(2, books.size(), () -> "BookShelf should have two books.");
     }
 }
