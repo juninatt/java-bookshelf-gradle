@@ -8,14 +8,14 @@ import org.junit.jupiter.api.TestInfo;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DisplayName("<= BookShelf Tests =>")
+@DisplayName("the bookshelf")
 class BookShelfTest {
 
     /**
      * @param testInfo Contains information about the current test
      */
     @Test
-    @DisplayName("<= Shelf should return empty when no books added =>")
+    @DisplayName("is empty when no books added to it")
     void shelfEmptyWhenNoBookAdded(TestInfo testInfo) {
         System.out.println("Working on test case " + testInfo.getDisplayName());
         BookShelf shelf = new BookShelf();
