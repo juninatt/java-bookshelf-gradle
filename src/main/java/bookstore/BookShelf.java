@@ -1,10 +1,16 @@
 package bookstore;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookShelf {
-    public List<String> books() {
-        return Collections.emptyList();
+
+    private final List<String> books = new ArrayList<>();
+
+    public void add(String book) {
+        books.add(book);
+    }
+    public List<String> getBooks() {
+        return books;
     }
 }
