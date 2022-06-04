@@ -2,6 +2,7 @@ package bookstore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class BookShelf {
@@ -12,6 +13,6 @@ public class BookShelf {
         books.addAll(Arrays.asList(booksToAdd));
     }
     public List<String> getBooks() {
-        return books;
+        return Collections.unmodifiableList(books);
     }
 }
