@@ -66,7 +66,7 @@ class BookShelfTest {
     void bookshelfArrangedByBookTitle() {
         BookShelf shelf = new BookShelf();
         shelf.add("Effective Java", "Code Complete","Spring in Action" );
-        List<String> books = shelf.arrange();
+        List<String> books = shelf.arrangeByTitle();
         assertEquals(Arrays.asList( "Code Complete", "Effective Java", "Spring in Action"), books,
                 () -> "Books in a bookshelf should be arranged lexicographically by book title");
     }
