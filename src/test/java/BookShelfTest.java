@@ -63,11 +63,19 @@ class BookShelfTest {
 
     @Test
     @DisplayName("should arrange books lexicographically by title")
-    void bookshelfArrangedByBookTitle() {
-        BookShelf shelf = new BookShelf();
-        shelf.add("Effective Java", "Code Complete","Spring in Action" );
-        List<String> books = shelf.arrangeByTitle();
+    void bookShelfArrangedByBookTitle() {
+        bookShelf.add("Effective Java", "Code Complete","Spring in Action" );
+        List<String> books = bookShelf.arrangeByTitle();
         assertEquals(Arrays.asList( "Code Complete", "Effective Java", "Spring in Action"), books,
                 () -> "Books in a bookshelf should be arranged lexicographically by book title");
+    }
+
+    @Test
+    void booksInBookShelfAreInInsertionOrderAfterCallingArrange() {
+        bookShelf.add("Effective Java", "Code Complete", "Spring in Action");
+        bookShelf.arrangeByTitle();
+        List<String> books = bookShelf.getBooks();
+        assertEquals(Arrays.asList("Effective Java", "Code Complete", "Spring in Action"), books,
+                () -> "Books in bookshelf are in insertion order");
     }
 }
