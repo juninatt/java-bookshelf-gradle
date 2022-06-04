@@ -1,6 +1,10 @@
 package bookstore;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookShelf {
 
@@ -13,7 +17,6 @@ public class BookShelf {
         return Collections.unmodifiableList(books);
     }
     public List<String> arrangeByTitle() {
-        books.sort(Comparator.naturalOrder());
-        return books;
+        return books.stream().sorted().collect(Collectors.toList());
     }
 }
