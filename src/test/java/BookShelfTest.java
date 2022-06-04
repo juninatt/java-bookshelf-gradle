@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,5 +59,15 @@ class BookShelfTest {
         } catch (Exception e) {
             assertTrue(e instanceof UnsupportedOperationException, () -> "Should throw UnsupportedOperationException.");
         }
+    }
+
+    @Test
+    @DisplayName("should arrange books lexicographically by title")
+    void bookshelfArrangedByBookTitle() {
+        BookShelf shelf = new BookShelf();
+        shelf.add("Effective Java", "Code Complete","Spring in Action" );
+        List<String> books = shelf.arrange();
+        assertEquals(Arrays.asList( "Code Complete", "Effective Java", "Spring in Action"), books,
+                () -> "Books in a bookshelf should be arranged lexicographically by book title");
     }
 }
