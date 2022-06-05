@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 public class BookShelf {
 
-    private final List<String> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
-    public void add(String... booksToAdd) {
+    public void add(Book... booksToAdd) {
         books.addAll(Arrays.asList(booksToAdd));
     }
-    public List<String> getBooks() {
+    public List<Book> getBooks() {
         return Collections.unmodifiableList(books);
     }
-    public List<String> arrangeByTitle() {
+    public List<Book> arrangeByTitle() {
         return books.stream().sorted().collect(Collectors.toList());
     }
 }
