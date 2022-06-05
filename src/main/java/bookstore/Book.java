@@ -22,6 +22,7 @@ public class Book implements Comparable<Book>{
     public LocalDate getPublishedOn() {
         return publishedOn;
     }
+
     @Override
     public String toString() {
         return "Book{" +

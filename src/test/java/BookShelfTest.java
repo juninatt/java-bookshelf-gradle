@@ -11,7 +11,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+// TODO: Improve exception tests
 
 @DisplayName("the bookshelf")
 class BookShelfTest {
@@ -37,7 +41,7 @@ class BookShelfTest {
     void shelfEmptyWhenNoBookAdded(TestInfo testInfo) {
         System.out.println("Working on test case " + testInfo.getDisplayName());
         List<Book> books = bookShelf.getBooks();
-        assertTrue(books.isEmpty(), () -> "BookShelf should be empty.");
+        assertThat(books).isEmpty();
     }
 
     @Test
@@ -45,7 +49,7 @@ class BookShelfTest {
     public void bookshelfContainsTwoBooksWhenTwoBooksAdded() {
         bookShelf.add(effectiveJava, halfAWar);
         List<Book> books = bookShelf.getBooks();
-        assertEquals(2, books.size(), () -> "BookShelf should have two books.");
+        assertThat(books.size()).isEqualTo(2);
     }
 
     @Test
@@ -53,7 +57,7 @@ class BookShelfTest {
     public void emptyBookShelfWhenAddIsCalledWithoutBooks() {
         bookShelf.add();
         List<Book> books = bookShelf.getBooks();
-        assertTrue(books.isEmpty(), () -> "BookShelf should be empty.");
+        assertThat(books).isEmpty();
     }
 
     @Test
@@ -74,8 +78,7 @@ class BookShelfTest {
     void bookShelfArrangedByBookTitle() {
         bookShelf.add(effectiveJava, springInAction, halfAWar);
         List<Book> books = bookShelf.arrange();
-        assertEquals(asList(effectiveJava, halfAWar, springInAction), books,
-                () -> "Books in a bookshelf should be arranged lexicographically by book title");
+        assertThat(books).isSortedAccordingTo(Comparator.naturalOrder());
     }
 
     @Test
@@ -84,16 +87,15 @@ class BookShelfTest {
         bookShelf.add(halfAWar, effectiveJava, springInAction);
         bookShelf.arrange();
         List<Book> books = bookShelf.getBooks();
-        assertEquals(asList(halfAWar, effectiveJava, springInAction), books,
-                () -> "Books in bookshelf are in insertion order");
+        assertThat(books).isEqualTo(asList(halfAWar, effectiveJava, springInAction));
     }
 
     @Test
     @DisplayName("books should be in descending order")
     void bookshelfArrangedByUserProvidedCriteria() {
         bookShelf.add(effectiveJava, halfAWar, springInAction);
-        List<Book> books = bookShelf.arrange(Comparator.<Book>naturalOrder().reversed());
-        assertEquals(asList(springInAction, halfAWar, effectiveJava), books,
-                () -> "Books in a bookshelf are arranged in descending order of book title");
+        Comparator<Book> reversed = Comparator.<Book>naturalOrder().reversed();
+        List<Book> books = bookShelf.arrange(reversed);
+        assertThat(books).isSortedAccordingTo(reversed);
     }
 }
