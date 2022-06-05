@@ -1,9 +1,6 @@
 package bookstore;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookShelf {
@@ -18,5 +15,9 @@ public class BookShelf {
     }
     public List<Book> arrangeByTitle() {
         return books.stream().sorted().collect(Collectors.toList());
+    }
+
+    public List<Book> arrangeByCriteria(Comparator<Book> criteria) {
+        return books.stream().sorted(criteria).collect(Collectors.toList());
     }
 }
