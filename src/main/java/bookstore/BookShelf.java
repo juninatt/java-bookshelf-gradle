@@ -13,11 +13,10 @@ public class BookShelf {
     public List<Book> getBooks() {
         return Collections.unmodifiableList(books);
     }
-    public List<Book> arrangeByTitle() {
-        return books.stream().sorted().collect(Collectors.toList());
+    public List<Book> arrange() {
+        return arrange(Comparator.naturalOrder());
     }
-
-    public List<Book> arrangeByCriteria(Comparator<Book> criteria) {
+    public List<Book> arrange(Comparator<Book> criteria) {
         return books.stream().sorted(criteria).collect(Collectors.toList());
     }
 }
