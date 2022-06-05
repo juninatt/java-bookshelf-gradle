@@ -7,10 +7,14 @@ import org.junit.jupiter.api.TestInfo;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -24,6 +28,7 @@ class BookShelfTest {
     private Book springInAction;
     private Book effectiveJava;
     private Book halfAWar;
+    private Book springSecurityInAction;
 
     @BeforeEach
     void init() throws Exception {
@@ -31,6 +36,7 @@ class BookShelfTest {
         springInAction = new Book("Spring in Action, 6th Edition", "Craig Walls", LocalDate.of(2022, Month.JANUARY, 1));
         effectiveJava = new Book("Effective Java", "Joshua Bloch", LocalDate.of(2008, Month.MAY, 8));
         halfAWar = new Book("Half a War", "Joe Abercrombie", LocalDate.of(2016, Month.MARCH, 8));
+        springSecurityInAction = new Book("Spring Security in Action", "Laurentiu Spilca", LocalDate.of(2020,Month.JANUARY, 1));
     }
 
     /**
@@ -97,5 +103,24 @@ class BookShelfTest {
         Comparator<Book> reversed = Comparator.<Book>naturalOrder().reversed();
         List<Book> books = bookShelf.arrange(reversed);
         assertThat(books).isSortedAccordingTo(reversed);
+    }
+
+    @Test
+    @DisplayName("books inside bookshelf are grouped by publication year")
+    void groupBooksInsideBookShelfByPublicationYear() {
+        bookShelf.add(effectiveJava, halfAWar, springInAction, springSecurityInAction);
+        Map<Year, List<Book>> booksByPublicationYear = bookShelf.groupByPublicationYear();
+        assertThat(booksByPublicationYear)
+                .containsKey(Year.of(2008))
+                .containsValues(singletonList(effectiveJava));
+        assertThat(booksByPublicationYear)
+                .containsKey(Year.of(2016))
+                .containsValues(singletonList(halfAWar));
+        assertThat(booksByPublicationYear)
+                .containsKey(Year.of(2020))
+                .containsValues(singletonList(springSecurityInAction));
+        assertThat(booksByPublicationYear)
+                .containsKey(Year.of(2022))
+                .containsValues(singletonList(springInAction));
     }
 }
