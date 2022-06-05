@@ -37,7 +37,7 @@ class BookShelfTest {
      * @param testInfo Contains information about the current test
      */
     @Test
-    @DisplayName("is empty when no books added to it")
+    @DisplayName("bookshelf is empty when no book is added to it")
     void shelfEmptyWhenNoBookAdded(TestInfo testInfo) {
         System.out.println("Working on test case " + testInfo.getDisplayName());
         List<Book> books = bookShelf.getBooks();
@@ -45,7 +45,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("should have two books when two books added to it")
+    @DisplayName("bookshelf contains two books when two books are added to it")
     public void bookshelfContainsTwoBooksWhenTwoBooksAdded() {
         bookShelf.add(effectiveJava, halfAWar);
         List<Book> books = bookShelf.getBooks();
@@ -53,7 +53,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("should be empty when add method empty")
+    @DisplayName("bookshelf without books remains empty when add-method is called without parameters")
     public void emptyBookShelfWhenAddIsCalledWithoutBooks() {
         bookShelf.add();
         List<Book> books = bookShelf.getBooks();
@@ -61,7 +61,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("should throw exception if book is added to existing book list")
+    @DisplayName("exception is thrown when book is added to existing book collection")
     void booksReturnedFromBookShelfIsImmutableForClient() {
         bookShelf.add(halfAWar, effectiveJava);
         List<Book> books = bookShelf.getBooks();
@@ -74,7 +74,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("should arrange books lexicographically by title")
+    @DisplayName("bookshelf is arranged lexicographically by title")
     void bookShelfArrangedByBookTitle() {
         bookShelf.add(effectiveJava, springInAction, halfAWar);
         List<Book> books = bookShelf.arrange();
@@ -82,7 +82,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("books should be in insertion order")
+    @DisplayName("bookshelf returns immutable collection of books to client")
     void booksInBookShelfAreInInsertionOrderAfterCallingArrange() {
         bookShelf.add(halfAWar, effectiveJava, springInAction);
         bookShelf.arrange();
@@ -91,7 +91,7 @@ class BookShelfTest {
     }
 
     @Test
-    @DisplayName("books should be in descending order")
+    @DisplayName("books in bookshelf are arranged by user-provided criteria(reversed lexicographical order by title")
     void bookshelfArrangedByUserProvidedCriteria() {
         bookShelf.add(effectiveJava, halfAWar, springInAction);
         Comparator<Book> reversed = Comparator.<Book>naturalOrder().reversed();
