@@ -110,17 +110,44 @@ class BookShelfTest {
     void groupBooksInsideBookShelfByPublicationYear() {
         bookShelf.add(effectiveJava, halfAWar, springInAction, springSecurityInAction);
         Map<Year, List<Book>> booksByPublicationYear = bookShelf.groupByPublicationYear();
+
         assertThat(booksByPublicationYear)
                 .containsKey(Year.of(2008))
                 .containsValues(singletonList(effectiveJava));
+
         assertThat(booksByPublicationYear)
                 .containsKey(Year.of(2016))
                 .containsValues(singletonList(halfAWar));
+
         assertThat(booksByPublicationYear)
                 .containsKey(Year.of(2020))
                 .containsValues(singletonList(springSecurityInAction));
+
         assertThat(booksByPublicationYear)
                 .containsKey(Year.of(2022))
                 .containsValues(singletonList(springInAction));
+    }
+
+    @Test
+    @DisplayName("books inside bookshelf are grouped according to user provided criteria(group by author name)")
+    void groupBooksByUserProvidedCriteria() {
+        bookShelf.add(effectiveJava, springInAction, springSecurityInAction, halfAWar);
+        Map<String, List<Book>> booksByAuthor = bookShelf.groupBy(Book::getAuthor);
+
+        assertThat(booksByAuthor)
+                .containsKey("Joshua Bloch")
+                .containsValues(singletonList(effectiveJava));
+
+        assertThat(booksByAuthor)
+                .containsKey("Craig Walls")
+                .containsValues(singletonList(springInAction));
+
+        assertThat(booksByAuthor)
+                .containsKey("Laurentiu Spilca")
+                .containsValues(singletonList(springSecurityInAction));
+
+        assertThat(booksByAuthor)
+                .containsKey("Joe Abercrombie")
+                .containsValues(singletonList(halfAWar));
     }
 }
