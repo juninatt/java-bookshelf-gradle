@@ -10,8 +10,10 @@ import org.junit.jupiter.api.TestInfo;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("the bookshelf")
@@ -75,7 +77,7 @@ class BookShelfTest {
     void bookShelfArrangedByBookTitle() {
         bookShelf.add(effectiveJava, springInAction, halfAWar);
         List<Book> books = bookShelf.arrangeByTitle();
-        assertEquals(Arrays.asList(effectiveJava, halfAWar, springInAction), books,
+        assertEquals(asList(effectiveJava, halfAWar, springInAction), books,
                 () -> "Books in a bookshelf should be arranged lexicographically by book title");
     }
 
@@ -85,7 +87,16 @@ class BookShelfTest {
         bookShelf.add(halfAWar, effectiveJava, springInAction);
         bookShelf.arrangeByTitle();
         List<Book> books = bookShelf.getBooks();
-        assertEquals(Arrays.asList(halfAWar, effectiveJava, springInAction), books,
+        assertEquals(asList(halfAWar, effectiveJava, springInAction), books,
                 () -> "Books in bookshelf are in insertion order");
+    }
+
+    @Test
+    @DisplayName("books should be in descending order")
+    void bookshelfArrangedByUserProvidedCriteria() {
+        bookShelf.add(effectiveJava, halfAWar, springInAction);
+        List<Book> books = bookShelf.arrangeByCriteria(Comparator.<Book>naturalOrder().reversed());
+        assertEquals(asList(springInAction, halfAWar, effectiveJava), books,
+                () -> "Books in a bookshelf are arranged in descending order of book title");
     }
 }
