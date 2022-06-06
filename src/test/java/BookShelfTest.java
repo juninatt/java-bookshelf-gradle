@@ -1,9 +1,8 @@
 import bookstore.Book;
 import bookstore.BookShelf;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.time.Year;
 import java.util.Comparator;
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
-// TODO: Improve exception tests
+//  TODO: Improve exception tests
+//      : Make injected data work with Comparator
 
 @DisplayName("the bookshelf")
+@ExtendWith(BooksParameterResolver.class)
 class BookShelfTest {
 
     private BookShelf bookShelf;
@@ -28,12 +27,12 @@ class BookShelfTest {
     private Book springSecurityInAction;
 
     @BeforeEach
-    void init() throws Exception {
+    void init(Map<String, Book> books) {
         bookShelf = new BookShelf();
-        springInAction = new Book("Spring in Action, 6th Edition", "Craig Walls", LocalDate.of(2022, Month.JANUARY, 1));
-        effectiveJava = new Book("Effective Java", "Joshua Bloch", LocalDate.of(2008, Month.MAY, 8));
-        halfAWar = new Book("Half a War", "Joe Abercrombie", LocalDate.of(2016, Month.MARCH, 8));
-        springSecurityInAction = new Book("Spring Security in Action", "Laurentiu Spilca", LocalDate.of(2020, Month.JANUARY, 1));
+        this.springInAction = books.get("Spring in Action");
+        this.effectiveJava = books.get("Effective Java");
+        this.halfAWar = books.get("Half a War");
+        this.springSecurityInAction = books.get("Spring Security in Action");
     }
 
     @Nested
