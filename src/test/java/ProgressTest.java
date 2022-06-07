@@ -4,6 +4,7 @@ import bookstore.Progress;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,6 +12,8 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Progress")
+@ExtendWith(BooksParameterResolver.class)
 public class ProgressTest {
 
     private BookShelf bookShelf;
@@ -23,6 +26,7 @@ public class ProgressTest {
 
     @BeforeEach
     void init(Map<String, Book> books) {
+        this.bookShelf = new BookShelf();
         this.springInAction = books.get("Spring in Action");
         this.effectiveJava = books.get("Effective Java");
         this.halfAWar = books.get("Half a War");
@@ -33,14 +37,13 @@ public class ProgressTest {
     @Test
     @DisplayName("is 0% completed and 100% to-read when no book is read yet")
     void progress100PercentUnread() {
-        BookShelf bookShelf = new BookShelf();
         Progress progress = bookShelf.progress();
         assertThat(progress.completed()).isEqualTo(0);
         assertThat(progress.toRead()).isEqualTo(100);
     }
 
     @Test
-    @DisplayName("40% and 60% to-read when 2 books are finished and 3 books not read yet")
+    @DisplayName("is 40% and 60% to-read when 2 books are finished and 3 books not read yet")
     void progressWithCompletedAndToReadPercentages() {
         bookShelf.add(effectiveJava, halfAWar, springInAction, springSecurityInAction, springBootInAction);
         effectiveJava.startedReadingOn(LocalDate.of(2016, Month.JULY, 1));

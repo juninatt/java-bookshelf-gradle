@@ -24,6 +24,11 @@ public class Book implements Comparable<Book>{
         this.finishedReadingOn = finishedReading;
     }
 
+    public boolean isRead() {
+        return startedReadingOn != null &&
+                finishedReadingOn != null;
+    }
+
     @Override
     public int compareTo(Book that) {
         return this.title.compareTo(that.title);
