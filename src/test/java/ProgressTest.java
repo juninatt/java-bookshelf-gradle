@@ -43,6 +43,17 @@ public class ProgressTest {
     }
 
     @Test
+    @DisplayName("is 100% completed and 0% to-read when no book is read yet")
+    void progressZeroPercentUnread() {
+        bookShelf.add(halfAWar);
+        halfAWar.startedReadingOn(LocalDate.of(2016, Month.JUNE, 1));
+        halfAWar.finishedReadingOn(LocalDate.of(2016, Month.JULY, 1));
+        Progress progress = bookShelf.progress();
+        assertThat(progress.completed()).isEqualTo(100);
+        assertThat(progress.toRead()).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("is 40% and 60% to-read when 2 books are finished and 3 books not read yet")
     void progressWithCompletedAndToReadPercentages() {
         bookShelf.add(effectiveJava, halfAWar, springInAction, springSecurityInAction, springBootInAction);
