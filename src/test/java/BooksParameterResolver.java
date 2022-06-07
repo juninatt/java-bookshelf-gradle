@@ -29,7 +29,7 @@ class BooksParameterResolver implements ParameterResolver {
         books.put("Effective Java", new Book("Effective Java", "Joshua Bloch", LocalDate.of(2008, Month.MAY, 8)));
         books.put("Half a War", new Book("Half a War", "Joe Abercrombie", LocalDate.of(2016, Month.MARCH, 8)));
         books.put("Spring Security in Action", new Book("Spring Security in Action", "Laurentiu Spilca", LocalDate.of(2020, Month.JANUARY, 1)));
-        books.put("Spring Boot in Action", new Book("Spring Boot in Action", "Craig Walls", LocalDate.of(2016, Month.JANUARY, 1));
+        books.put("Spring Boot in Action", new Book("Spring Boot in Action", "Craig Walls", LocalDate.of(2016, Month.JANUARY, 1)));
         return books;
     }
 }
