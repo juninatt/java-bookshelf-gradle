@@ -13,7 +13,6 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 //  TODO: Improve exception tests
-//      : Make injected data work with Comparator
 
 @DisplayName("the bookshelf")
 @ExtendWith(BooksParameterResolver.class)
