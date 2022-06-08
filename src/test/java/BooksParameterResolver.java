@@ -36,6 +36,11 @@ class BooksParameterResolver implements ParameterResolver {
     @Override
     public Object resolveParameter(final ParameterContext parameterContext,
                                    final ExtensionContext extensionContext) throws ParameterResolutionException {
+        ExtensionContext.Store store = extensionContext.getStore(ExtensionContext.Namespace.create(Book.class));
+        return store.getOrComputeIfAbsent("books", k -> getBooks());
+    }
+
+    private Map<String, Book> getBooks() {
         return books;
     }
 }
